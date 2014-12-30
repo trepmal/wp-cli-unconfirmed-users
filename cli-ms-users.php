@@ -27,7 +27,7 @@ class Unconfirmed_Users extends WP_CLI_Command {
 	 *
 	 * ## EXAMPLES
 	 *
-	 *     wp unuser list
+	 *     wp unconfirmed list
 	 *
 	 * @subcommand list
 	 */
@@ -54,6 +54,10 @@ class Unconfirmed_Users extends WP_CLI_Command {
 	 *
 	 * <user>
 	 * : ID, username, email or key
+	 *
+	 * ## EXAMPLES
+	 *
+	 *     wp unconfirmed activate username
 	 *
 	 */
 	function activate( $args, $assoc_args ) {
