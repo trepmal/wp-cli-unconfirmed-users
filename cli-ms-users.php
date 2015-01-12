@@ -42,8 +42,12 @@ class Unconfirmed_Users extends WP_CLI_Command {
 		global $wpdb;
 		$results = $wpdb->get_results( "SELECT * FROM $wpdb->signups $where" );
 
-		$formatter = new \WP_CLI\Formatter( $assoc_args, array_keys( (array) $results[0] ), 'unconfirmed' );
-		$formatter->display_items( $results );
+		if ( $results ) {
+			$formatter = new \WP_CLI\Formatter( $assoc_args, array_keys( (array) $results[0] ), 'unconfirmed' );
+			$formatter->display_items( $results );
+		} else {
+			WP_CLI::line('No unconfirmed users found');
+		}
 
 	}
 
