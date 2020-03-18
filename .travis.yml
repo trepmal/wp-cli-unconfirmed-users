@@ -55,13 +55,10 @@ jobs:
         - composer phpcs
       env: BUILD=sniff
     - stage: test
+      php: 7.3
+      env: WP_VERSION=latest
+    - stage: test
       php: 7.2
-      env: WP_VERSION=latest
-    - stage: test
-      php: 7.1
-      env: WP_VERSION=latest
-    - stage: test
-      php: 7.0
       env: WP_VERSION=latest
     - stage: test
       php: 5.6
