@@ -1,12 +1,5 @@
 <?php
 /**
- * Plugin Name: Unconfirmed Users CLI
- * Description: List and activate unconfirmed users
- */
-
-if ( ! defined( 'WP_CLI' ) ) return;
-
-/**
  * Unconfirmed Users
  */
 class Unconfirmed_Users extends WP_CLI_Command {
@@ -99,4 +92,3 @@ class Unconfirmed_Users extends WP_CLI_Command {
 
 }
 
-WP_CLI::add_command( 'unconfirmed', 'Unconfirmed_Users' );
