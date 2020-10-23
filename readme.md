@@ -11,25 +11,6 @@ Quick links: [Using](#using) | [Installing](#installing) | [Contributing](#contr
 
 This package implements the following commands:
 
-### wp unconfirmed activate
-
-Activate a user by signup ID, username, email, or activation key
-
-~~~
-wp unconfirmed activate <user>
-~~~
-
-**OPTIONS**
-
-	<user>
-		ID, username, email or key
-
-**EXAMPLES**
-
-    wp unconfirmed activate username
-
-
-
 ### wp unconfirmed list
 
 List unconfirmed signups from the last two days.
@@ -52,6 +33,44 @@ wp unconfirmed list [--all] [--fields=<fields>] [--format=<format>]
 **EXAMPLES**
 
     wp unconfirmed list
+
+
+
+### wp unconfirmed activate
+
+Activate a user by signup ID, username, email, or activation key
+
+~~~
+wp unconfirmed activate <user>
+~~~
+
+**OPTIONS**
+
+	<user>
+		ID, username, email or key
+
+**EXAMPLES**
+
+    wp unconfirmed activate username
+
+
+
+### wp unconfirmed delete
+
+Delete an unconfirmed user by signup ID, username, email, or activation key
+
+~~~
+wp unconfirmed delete <user>
+~~~
+
+**OPTIONS**
+
+	<user>
+		ID, username, email or key
+
+**EXAMPLES**
+
+    wp unconfirmed delete username
 
 ## Installing
 

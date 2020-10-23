@@ -90,5 +90,66 @@ class Unconfirmed_Users extends WP_CLI_Command {
 		}
 	}
 
-}
+	/**
+	 * Delete an unconfirmed user by signup ID, username, email, or activation key
+	 *
+	 * ## OPTIONS
+	 *
+	 * <user>
+	 * : ID, username, email or key
+	 *
+	 * ## EXAMPLES
+	 *
+	 *     wp unconfirmed delete username
+	 *
+	 */
+	function delete( $args, $assoc_args ) {
+		global $wpdb;
+		$user_info = [];
 
+		list( $user ) = $args;
+
+		// int check prevents false match with a key
+		if ( is_int( $user ) ) {
+			$user_info = $wpdb->get_results( $wpdb->prepare( "SELECT signup_id, user_login, user_email FROM $wpdb->signups WHERE signup_id = %d", $user ) );
+		}
+		if ( empty( $user_info ) ) {
+			foreach( array( 'user_login', 'user_email', 'activation_key') as $field ) {
+				$user_info = $wpdb->get_results( $wpdb->prepare( "SELECT signup_id, user_login, user_email FROM $wpdb->signups WHERE $field = %s", $user ) );
+				if ( ! empty( $user_info ) ) {
+					break;
+				}
+			}
+		}
+
+		// if *still* empty...
+		if ( empty( $user_info ) ) {
+			WP_CLI::error( "No unconfirmed user found for: $user" );
+		}
+
+		$user_info = $user_info[0];
+
+		WP_CLI::confirm( WP_CLI::colorize( sprintf(
+			"Found user: %%y%s%%n <%%g%s%%n>.\nProceed?",
+			$user_info->user_login,
+			$user_info->user_email
+		) ) );
+
+		$wpdb->delete(
+			$wpdb->signups,
+			[
+				'signup_id' => $user_info->signup_id,
+			],
+			[
+				'%d',
+			]
+		);
+
+		if ( $wpdb->rows_affected > 0 ) {
+			WP_CLI::success( "User deleted" );
+		} else {
+			WP_CLI::error( "There was an unknown error in deleting the user." );
+		}
+	}
+
+}
