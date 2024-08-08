@@ -1,3 +1,12 @@
+
+❗ As of [WP-CLI v2.11.0](https://make.wordpress.org/cli/2024/08/08/wp-cli-v2-11-0-release-notes/) you may prefer the `wp user signup` commands:
+
+- `wp user signup list`: List signups
+- `wp user signup get`: Get details about a signup
+- `wp user signup activate`: Activate one or more signups
+- `wp user signup delete`: Delete one or more signups
+
+
 trepmal/wp-cli-unconfirmed-users
 ================================
 
